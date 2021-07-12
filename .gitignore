@@ -127,3 +127,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# .exe
+*.exe
+
+# ida
+*.id0
+*.id1
+*.nam
+*.til
