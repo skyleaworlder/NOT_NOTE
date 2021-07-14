@@ -69,3 +69,39 @@
 第二个方式是栈空间的申请，一个局部变量的声明 / 定义也能分配到一块内存。
 第三个方式是堆空间的申请，比如 malloc / calloc / new 等方式。
 ```
+
+## 二、内存对齐
+
+```c
+struct A {
+  int a;
+  double b;
+  char c;
+};
+
+int main() {
+  printf("%d\n", sizeof(struct A));
+}
+```
+
+这个运行结果是 24，但是：
+
+```c
+struct A {
+  int a;
+  double b;
+  char c;
+} __attribute__ ((packed));
+
+int main() {
+  printf("%d\n", sizeof(struct A));
+}
+```
+
+其运行结果就变成了 13。结构体内需要 8 字节 8 字节地对齐：
+
+* `int a` 4 字节，需要后补 4 字节；
+* `double b` 8 字节，不需要补充；
+* `char c` 1 字节，需要后补 7 字节。
+
+但是开启了 `__attribute__ ((packed))` 就可以取消内存对齐了。`__attribute__` 可以为 **函数、变量、类型** 设置一些属性。
