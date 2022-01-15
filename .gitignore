@@ -136,3 +136,9 @@ dmypy.json
 *.id1
 *.nam
 *.til
+
+# vscode
+.vscode/
+
+# metals for scala
+.metals/
